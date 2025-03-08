@@ -1,2 +1,8 @@
 # EER-Ecommerce
 Este é um repositório que guarda um PDF do modelo Entidade-Relacionamento aprimorado para um E-Commerce que fiz no MySQL Workbench para entrega no curso de Inteligência Artificial Aplicada a Dados com Copilot da plataforma DIO.
+
+# Mudanças
+* Escolhi salvar os dados do cartão do cliente como um atributo pois vi que esse era o único método de pagamento onde realmente era necessário salvar algo além do próprio método do pagamento. Pensei em um esquema onde os dados de um cartão são salvos como uma string padronizada que depois pode ser lida usando um método específico para pegar todos os dados. Caso o cliente queira cadastrar um novo cartão, é só adicionar mais um atributo "Dados do cartão 2" e assim por diante. Achei uma boa decisão, já que a maioria dos clientes não terá mais de 3 cartões.
+* Como não teria uma classe para pagamentos, escolhi deixar os dados do método de pagamento e valor do pedido na própria entidade "Pedido", já que acredito que são dados relevantes para uma empresa.
+* Decidi que a empresa poderia entregar, mas também vender para a retirada. Assim, só faz sentido criar dados relacionados a entrega caso sejam necessários e então em uma entidade separada. Pensei que a verificação do pedido ser entrega ou retirada poderia ser feita verificando se o id da entrega existe ou não, ao invés de persistir mais um tipo de dado. Também movi o atributo "Frete" de Pedido para a entidade Entrega, já que agora ele pode existir ou não.
+* Para que um cliente não seja PJ e PF ao mesmo tempo, modifiquei o atributo "Identificação" para "CPF/CNPJ". Para consultar quantos clientes são PJ ou PF, penso que é possível fazer uma verificação pela própria String que contém o CPF e CNPJ e então retirar esse dado, sem precisar armazená-lo.
